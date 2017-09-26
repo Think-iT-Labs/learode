@@ -1,3 +1,5 @@
+//WIP: Drawer feature still not implemented
+
 import React from 'react';
 import Button from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';

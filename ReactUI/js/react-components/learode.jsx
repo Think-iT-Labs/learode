@@ -1,12 +1,11 @@
-import React, {
-	Component
-} from 'react';
+import React, {Component} from 'react';
 import Reading from './reading.jsx';
 
 const urlForUsername = username =>
 	`http://127.0.0.1:5000/user/${username}`
 
 class Learode extends Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -14,6 +13,7 @@ class Learode extends Component {
 			learodeData: false
 		}
 	}
+
 
 	componentDidMount() {
 		fetch(urlForUsername(this.props.username))
@@ -35,6 +35,7 @@ class Learode extends Component {
 				})
 			})
 	}
+
 
 	render() {
 		if (this.state.requestFailed) return <p>Failed!</p>

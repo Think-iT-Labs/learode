@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import Learode from './learode.jsx';
-import DrawerTest from './drawer.jsx';
+//import DrawerTest from './drawer.jsx'; WIP: Drawer feature 
+
 class App extends React.Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -13,6 +15,8 @@ class App extends React.Component {
 		}
 
 	}
+
+
 	switchMode() {
 		if (this.state.operation == "new") {
 			this.setState({
@@ -31,12 +35,14 @@ class App extends React.Component {
 		}
 	}
 
+
 	fetchUsername(un) {
 		this.setState({
 			username: this.refs.un.value,
 			fetched: true
 		});
 	}
+
 
 	manualGitScan() {
 		axios.get('http://127.0.0.1:5000/scan/' + this.state.username)
@@ -48,6 +54,7 @@ class App extends React.Component {
 			});
 	}
 
+
 	renderContent() {
 		if (this.state.fetched == true) {
 			this.state.fetched = false
@@ -56,6 +63,7 @@ class App extends React.Component {
 			return false
 		}
 	}
+
 
 	render() {
         return (

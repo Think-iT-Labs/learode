@@ -1,13 +1,18 @@
 from eve import Eve
-from Scanner import *
+from scanner import *
+
 
 app = Eve()
+
 @app.route('/scan/<git_username>')
-def launchScan(git_username):
-	scanresult = manualScan(git_username)
-	if (scanresult == 1):
+def launch_scan(git_username):
+
+	scan_result = manual_scan(git_username)
+	if (scan_result == 1):
 		return "Success"
 	else:
 		return "Error"
+
+
 if __name__ == '__main__':
     app.run()
