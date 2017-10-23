@@ -32,13 +32,13 @@ Learode is a portmanteau made by the words Learn and Code, referring to the goal
     $ python3.6 /API/prepare_database.py 
 The program will connect to the default host and port (localhost:27017). If you want to change the default values you should modify the connection code in db_connect.py and prepare_database.py.
 
-###Running
+### Running
 
     $ python3.6 /API/run.py
     $ cd /ReactUI
     $ npm start
 
-###Using Learode dev version
+### Using Learode dev version
 
  1. Connect to the host and port of ReactJS (default is localhost:8080)
  2. Enter the username in the textfield in the navbar
