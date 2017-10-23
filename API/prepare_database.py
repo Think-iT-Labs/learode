@@ -11,8 +11,7 @@ db = client.Learode
 user_collection = db.user
 resource_collection = db.resource
 
-test_user_query =
-[
+test_user_query = [
     {
         "user_id":  1,
         "github_username":  "SynergySINE",
@@ -24,12 +23,11 @@ test_user_query =
     }
 ]
 
-test_resource_query =
-[
+test_resource_query = [
     {
         "res_id": 1,
         "title": "Intermediate Python",
-        "url": "http: //www.book.pythontips.com.com",
+        "url": "http: //www.book.pythontips.com",
         "language": "python",
         "level": "medium"
     },
