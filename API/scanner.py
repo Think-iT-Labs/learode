@@ -99,13 +99,13 @@ def store_reading_list(tmp_reading_list, username):
 def get_user_info():
     try:
         user_list = db.user.find({
-            'github_username':1,
-            'token':1
+            'github_username':True,
+            'token':True
         })
     except pm.errors.OperationFailure as err:
         logger.error(err)
 
-    if user_list.count() != 0:
+    if user_list.count() is not None:
         json_user_list = user_list.json()
 
     return json_user_list
