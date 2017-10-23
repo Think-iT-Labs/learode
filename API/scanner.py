@@ -11,8 +11,11 @@ logger = create_logger()
 
 def request_git_api(request_url):
     res = None
+    #headers_dict = {'Authorization':
+    #                'token ENTER_TOKEN_HERE'}
+
     try:
-        res = requests.get(request_url, timeout=5)
+        res = requests.get(request_url, timeout=5) #headers=headers_dict, timeout=5)
         res.raise_for_status()
     except Exception as err:
         logger.error(err)
@@ -24,6 +27,7 @@ def request_git_api(request_url):
 def git_scan(user):
     request_url = '{}/users/{}/repos'.format(url, user)
     res_user_repos = request_git_api(request_url)
+    print(res_user_repos)
     if not res_user_repos:
         return False
     json_user_repos = res_user_repos.json()
@@ -65,7 +69,7 @@ def create_reading_list(user_languages):
     resource_list = []
     for language in user_languages:
         result = fetch_available_resources(language)
-        if not result:
+        if result == False:
             return False
         resource_list.append(result)
 
@@ -115,7 +119,7 @@ def get_user_info():
         logger.error(err)
         return False
 
-    if user_list.count() is not None:
+    if len(user_list) != 0:
         json_user_list = user_list.json()
 
     return json_user_list
