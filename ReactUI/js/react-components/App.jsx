@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Learode from './learode.jsx';
-//import DrawerTest from './drawer.jsx'; WIP: Drawer feature 
+//import DrawerTest from './drawer.jsx'; TODO: Drawer feature 
 
 class App extends React.Component {
 
@@ -35,7 +35,7 @@ class App extends React.Component {
         }
     }
 
-
+    
     fetchUsername(un) {
         this.setState({
             username: this.refs.un.value,
