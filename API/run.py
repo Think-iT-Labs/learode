@@ -1,5 +1,5 @@
 from eve import Eve
-from flask import jsonify, request, url_for, redirect
+from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
 
 
@@ -13,8 +13,10 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-app.config['GITHUB_CLIENT_ID'] = '' #client_id
-app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
+#app.config['GITHUB_CLIENT_ID'] = '' #client_id
+#app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
+app.config['GITHUB_CLIENT_ID'] = 'a2dfecffbb39b5f749fb'
+app.config['GITHUB_CLIENT_SECRET'] = 'ff7b92af5ba6a1d2299dcb94ca6ebd2fde00f3de'
 
 github = GitHub(app)
 
@@ -29,11 +31,9 @@ def launch_scan(git_username):
     apilogger.info("Successful scan")
     return jsonify({"response":200})
 
-@app.route('/login/<github_username>')
-def login(github_username):
-    global username
-    username = github_username
-    return github.authorize()
+@app.route('/login')
+def login():
+    return github.authorize(scope="user,repo")
 
 @app.route('/callback')
 @github.authorized_handler
@@ -42,6 +42,7 @@ def authorized(oauth_token):
     if oauth_token is None:
         flash("Authorization failed.")
         return jsonify({"response":500})
+
     try:
         user = db.user.find_one({
         'github_access_token': oauth_token
@@ -49,8 +50,11 @@ def authorized(oauth_token):
     except pm.errors.OperationFailure as err:
         logger.error(err)
         return False
+    
     if user is None:
-        global username
+        user_info = requests.get('https://api.github.com/user', auth=('token',oauth_token))
+        json_info = user_info.json()
+        username = json_info['login']
         update_query = {
         '$set':{
                'github_access_token': oauth_token
