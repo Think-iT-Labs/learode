@@ -7,7 +7,7 @@ MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
 X_DOMAINS = '*'
 MONGO_DBNAME = 'Learode'
-X_HEADERS = 'Access-Control-Allow-Origin: *'
+X_HEADERS = 'Access-Control-Allow-Origin'
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 

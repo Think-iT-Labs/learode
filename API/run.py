@@ -1,7 +1,7 @@
 from eve import Eve
 from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
-from flask_cors import CORS
+
 
 
 import requests
@@ -17,9 +17,8 @@ app = Eve()
 #app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
 app.config['GITHUB_CLIENT_ID'] = 'a2dfecffbb39b5f749fb'
 app.config['GITHUB_CLIENT_SECRET'] = 'ff7b92af5ba6a1d2299dcb94ca6ebd2fde00f3de'
-app.config['SECRET_KEY'] = 'J{mlfdsjgkfdsgfgkfgkp'
+
 github = GitHub(app)
-CORS(app)
 
 username = ""
 
@@ -65,23 +64,7 @@ def authorized(oauth_token):
             'github_username': username
         },
                        update_query, upsert=True)
-    
-    return redirect(next_url+'?login={}'.format(username))
-
-@app.route('/logout/<username>')
-def logout(username):
-    try:
-        db.products.update({
-            'github_username': username 
-        },{'$unset': {
-            'github_access_token': ""
-        }
-        })
-    except pm.errors.OperationFailure as err:
-        logger.error(err)
-        return False
-    return redirect("http://localhost:8080")
+    return redirect(next_url)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+    app.run()
