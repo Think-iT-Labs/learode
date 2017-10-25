@@ -1,7 +1,7 @@
 from eve import Eve
 from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
-
+from flask_cors import CORS
 
 
 import requests
@@ -13,12 +13,12 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-#app.config['GITHUB_CLIENT_ID'] = '' #client_id
-#app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
-app.config['GITHUB_CLIENT_ID'] = 'a2dfecffbb39b5f749fb'
-app.config['GITHUB_CLIENT_SECRET'] = 'ff7b92af5ba6a1d2299dcb94ca6ebd2fde00f3de'
+app.config['GITHUB_CLIENT_ID'] = '' #client_id
+app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
+app.config['SECRET_KEY'] = '' #secret_key
 
 github = GitHub(app)
+CORS(app)
 
 username = ""
 
@@ -64,7 +64,38 @@ def authorized(oauth_token):
             'github_username': username
         },
                        update_query, upsert=True)
-    return redirect(next_url)
+    
+    return redirect(next_url+'?login={}'.format(username))
 
+@app.route('/logout/<username>')
+def logout(username):
+    try:
+        db.products.update({
+            'github_username': username 
+        },{'$unset': {
+            'github_access_token': ""
+        }
+        })
+    except pm.errors.OperationFailure as err:
+        logger.error(err)
+        return False
+    return redirect("http://localhost:8080")
+
+@app.route('/check/<username>')
+def check_token(username):
+    try:
+        user = db.user.find_one({
+        'github_username': username
+    })
+    except pm.errors.OperationFailure as err:
+        logger.error(err)
+        return False
+    if user is None:
+        return jsonify({'response':404})
+    user_info = requests.get('https://api.github.com/applications/{}/tokens/{}'.format()
+    json_info = user_info.json()
+    user_id = json_info['user_id']
+    /applications/:client_id/tokens/:access_token
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
+
