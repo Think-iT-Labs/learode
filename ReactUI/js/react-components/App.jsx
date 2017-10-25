@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
+            username: this.props.username,
             operation: "new",
             oppositelistname: "last reading list",
             fetched: false
