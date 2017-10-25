@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 
 const urlForLogin = `http://localhost:5000/login`
-const urlForCheck = `http://localhost:5000/check/`
+var urlForCheck = user => `http://localhost:5000/check/${user}`
 
 
 class Index extends React.Component {
@@ -16,24 +16,22 @@ class Index extends React.Component {
             connected: false,
             username: ''
         }
+    this.verifyToken = this.verifyToken.bind(this)
     }
-    componentWillMount() {
-        this.setState({
-            username: queryString.parse(location.search)['login']
-        })
+    
 
-        if (username != '') {
-            this.setState({
-                connected: verifyToken(this.state.username)
-            })
-        }
-    }
-
-    verifyToken(username) {
-        axios.get(urlForCheck + username)
-            .then(function(response) {
-                console.log(response);
-                if (response['response'] == 200) {
+    verifyToken(user) {
+        axios.get(urlForCheck(user))
+            .then((response) => {
+                if (response['data']['response'] == 200) {
+                    this.setState({
+                        connected: true,
+                        username: user
+                    },function () {
+                        console.log(this.state.connected);
+                        console.log(this.state.username);
+                    }
+                );
                     return true
                 }
                 else {
@@ -43,6 +41,11 @@ class Index extends React.Component {
             .catch(function(error) {
                 console.log(error);
             });
+    }
+
+    componentWillMount() {
+        var user = queryString.parse(location.search)['login'];
+        this.verifyToken(user)
     }
 
     render() {

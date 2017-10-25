@@ -13,9 +13,9 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-app.config['GITHUB_CLIENT_ID'] = '' #client_id
-app.config['GITHUB_CLIENT_SECRET'] = '' #client_secret
-app.config['SECRET_KEY'] = '' #secret_key
+app.config['GITHUB_CLIENT_ID'] = ''
+app.config['GITHUB_CLIENT_SECRET'] = ''
+app.config['SECRET_KEY'] = ''
 
 github = GitHub(app)
 CORS(app)
@@ -90,12 +90,18 @@ def check_token(username):
     except pm.errors.OperationFailure as err:
         logger.error(err)
         return False
+
     if user is None:
         return jsonify({'response':404})
-    user_info = requests.get('https://api.github.com/applications/{}/tokens/{}'.format()
-    json_info = user_info.json()
-    user_id = json_info['user_id']
-    /applications/:client_id/tokens/:access_token
+
+    res = requests.get('https://api.github.com/applications/{}/tokens/{}'.format(app.config['GITHUB_CLIENT_ID'], user['github_access_token']), auth=(app.config['GITHUB_CLIENT_ID'], app.config['GITHUB_CLIENT_SECRET']))
+    print(res.status_code)
+
+    if res.status_code == 200:
+        return jsonify({"response":200})
+    else:
+        return jsonify({"response":500})
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(threaded=True)
 
