@@ -29,28 +29,32 @@ test_resource_query = [
         "title": "Intermediate Python",
         "url": "http: //www.book.pythontips.com",
         "language": "python",
-        "level": "medium"
+        "level": "medium",
+	"read_by": []
     },
     {
         "res_id": 2,
         "title": "Python End-to-End Data analysis",
         "url": "https: //www.packtpub.com/big-data-and-business-intelligence/python-end-end-data-analysis",
         "language": "python",
-        "level": "medium"
+        "level": "medium",
+	"read_by": []
     },
     {
         "res_id": 3,
         "title": "Learning Javascript",
         "url": "https: //www.amazon.co.uk/Learning-JavaScript-Shelley-Powers/dp/8184042159",
         "language": "javascript",
-        "level": "beginner"
+        "level": "beginner";
+	"read_by": []
     },
     {
         "res_id": 4,
         "title": "Learn HTML at MDN",
         "url": "https: //developer.mozilla.org/en-US/docs/Web/HTML/Element/article",
         "language": "html",
-        "level": "beginner"
+        "level": "beginner",
+	"read_by": []
     }
 ]
 
