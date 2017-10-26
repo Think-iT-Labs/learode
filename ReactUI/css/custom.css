@@ -94,14 +94,14 @@
 
 .btn-github,
 .btn-github:visited {
-    border-color: #d4d4d4;
-    background: #ececec;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-    background-image: -webkit-linear-gradient(#f4f4f4, #ececec);
-    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-    background-image: -ms-linear-gradient(#f4f4f4, #ececec);
-    background-image: -o-linear-gradient(#f4f4f4, #ececec);
-    background-image: linear-gradient(#f4f4f4, #ececec);
+    border-color: #111a51;
+    background: #434868;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#111a51));
+    background-image: -webkit-linear-gradient(#f4f4f4, #111a51);
+    background-image: -moz-linear-gradient(#f4f4f4, #111a51);
+    background-image: -ms-linear-gradient(#f4f4f4, #111a51);
+    background-image: -o-linear-gradient(#f4f4f4, #111a51);
+    background-image: linear-gradient(#f4f4f4, #111a51);
 }
 
 .btn-github:hover,
@@ -163,3 +163,4 @@
     width: 100%;
     overflow:hidden;
 }
+

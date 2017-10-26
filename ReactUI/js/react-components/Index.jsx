@@ -74,8 +74,8 @@ class Index extends React.Component {
                             <div className="social-box">
                                 <div className="row mg-btm">
                                     <div className="col-md-12">
-                                        <a href={urlForLogin} className="btn btn-primary btn-block">
-                                              <i className="icon-github"></i>    Login with Github
+                                        <a href={urlForLogin} className="btn btn-primary btn-block btn-github">
+                                              <img src="../../pics/git.png" height="42" width="42"/> Login with Github
                                             </a>
                                     </div>
                                 </div>
@@ -90,7 +90,6 @@ class Index extends React.Component {
             <footer className="py-5 bg-learode footer">
             <div className="container">
                 <p className="m-0 text-center text-black">Copyright &copy; Learode 2017</p>
-
             </div>
             </footer>
         </div>
