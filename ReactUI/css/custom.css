@@ -154,4 +154,12 @@
 .btn-github.large:focus:before,
 .btn-github.large:active:before {
     background-position: -108px -22px;
-
+}
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+}

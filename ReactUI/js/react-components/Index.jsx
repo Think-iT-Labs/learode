@@ -49,8 +49,22 @@ class Index extends React.Component {
     render() {
 
         return (
-            <div>
-                {this.state.connected ?
+<div>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-learode fixed-top">
+            <div className="container">
+                <a className="navbar-brand" href="#">Learode: Learn by Coding !</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+                <div className="collapse navbar-collapse" id="navbarResponsive">
+
+                </div>
+            </div>
+            </nav>
+            <div className="container">
+            <h1>H</h1>
+            <h2>h</h2>
+            {this.state.connected ?
                 <App username={this.state.username}></App> :
                 <div className="container">
                     <div className="row">
@@ -73,6 +87,13 @@ class Index extends React.Component {
                 </div>
                 }
             </div>
+            <footer className="py-5 bg-learode footer">
+            <div className="container">
+                <p className="m-0 text-center text-black">Copyright &copy; Learode 2017</p>
+
+            </div>
+            </footer>
+        </div>
         );
     }
 }
