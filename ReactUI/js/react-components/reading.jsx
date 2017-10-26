@@ -5,6 +5,9 @@ class Reading extends Component {
     constructor(props) {
         super(props)
     }
+
+
+
     render() {
         return (
     <div>
@@ -20,6 +23,9 @@ class Reading extends Component {
                 <p className="card-text">Difficulty level: {this.props.item.level}</p>
                     <p className="card-text">URL: <a href={this.props.item.url}>Click here</a></p>
                 </div>
+		<div className="col-lg-3 portfolio-item card-read">
+		    <a href="#" className="btn btn-primary btn-success"><img src="../../pics/tick.gif" height="20" width="20"></img> Read</a>
+		</div>
             </div>
         </div>
         </div>
