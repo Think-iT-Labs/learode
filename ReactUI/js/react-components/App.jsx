@@ -11,9 +11,8 @@ class App extends React.Component {
             username: this.props.username,
             operation: "new",
             oppositelistname: "last reading list",
-            fetched: false
+            fetched: true
         }
-
     }
 
 
@@ -36,12 +35,12 @@ class App extends React.Component {
     }
 
     
-    fetchUsername(un) {
+    /*fetchUsername(un) {
         this.setState({
             username: this.refs.un.value,
             fetched: true
         });
-    }
+    }*/
 
 
     manualGitScan() {
@@ -76,14 +75,6 @@ class App extends React.Component {
             </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <div className="input-container">
-                            <form>
-                                <input type="text" className="form-control input-sm chat-input" id="username" ref="un" placeholder="Github Username"/>
-                                <input type="button" className="btn btn-primary btn-md" value="Go!" onClick={(un)=>this.fetchUsername(un)}/>
-                            </form>
-                        </div>
-                    </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.switchMode()}>Switch to {this.state.oppositelistname}</a>
                     </li>

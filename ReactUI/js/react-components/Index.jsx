@@ -16,25 +16,23 @@ class Index extends React.Component {
             connected: false,
             username: ''
         }
-    this.verifyToken = this.verifyToken.bind(this)
+        this.verifyToken = this.verifyToken.bind(this)
     }
-    
+
 
     verifyToken(user) {
         axios.get(urlForCheck(user))
             .then((response) => {
                 if (response['data']['response'] == 200) {
                     this.setState({
-                        connected: true,
-                        username: user
-                    },function () {
+                        username: user,
+                        connected: true
+                    }, function() {
                         console.log(this.state.connected);
                         console.log(this.state.username);
-                    }
-                );
+                    });
                     return true
-                }
-                else {
+                } else {
                     return false
                 }
             })
@@ -52,27 +50,28 @@ class Index extends React.Component {
 
         return (
             <div>
-            {this.state.connected ? <App username={this.state.username}></App> :
+                {this.state.connected ?
+                <App username={this.state.username}></App> :
                 <div className="container">
-	                <div className="row">
-		                <form className="form-signin mg-btm">
-                    	<h3 className="heading-desc">
-		                Login to Learode</h3>
-		                <div className="social-box">
-			                <div className="row mg-btm">
-                             <div className="col-md-12">
-                                <a href={urlForLogin} className="btn btn-primary btn-block">
-                                  <i className="icon-github"></i>    Login with Github
-                                </a>
-			                </div>
-			                </div>
-			
-		                </div>
+                    <div className="row">
+                        <form className="form-signin mg-btm">
+                            <h3 className="heading-desc">
+                                Login to Learode</h3>
+                            <div className="social-box">
+                                <div className="row mg-btm">
+                                    <div className="col-md-12">
+                                        <a href={urlForLogin} className="btn btn-primary btn-block">
+                                              <i className="icon-github"></i>    Login with Github
+                                            </a>
+                                    </div>
+                                </div>
 
-                      </form>
-	                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
-            }
+                }
             </div>
         );
     }
