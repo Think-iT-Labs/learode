@@ -1,6 +1,30 @@
 .bg-learode {
  background-color:#DEEDC7 !important
 }
+.super-text {
+ color: #000;
+ text-shadow: 0px 0px 16px rgba(150, 150, 150, 1);
+ font-size: 24px;
+}
+.copyright-text {
+  color: #000000;
+  font-size: 18px;
+  text-shadow: 0px 0px 2px #CCCCCC;
+}
+.bg-navbar {
+ background: #bdd879; /* Old browsers */
+ background: -moz-linear-gradient(top, #bdd879 0%, #cbd8ab 100%); /* FF3.6-15 */
+ background: -webkit-linear-gradient(top, #bdd879 0%,#cbd8ab 100%); /* Chrome10-25,Safari5.1-6 */
+ background: linear-gradient(to bottom, #bdd879 0%,#cbd8ab 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdd879', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.bg-footer {
+ background: #cbd8ab; /* Old browsers */
+ background: -moz-linear-gradient(top, #cbd8ab 0%, #bdd879 100%); /* FF3.6-15 */
+ background: -webkit-linear-gradient(top, #cbd8ab 0%,#bdd879 100%); /* Chrome10-25,Safari5.1-6 */
+ background: linear-gradient(to bottom, #cbd8ab 0%,#bdd879 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cbd8ab', endColorstr='#bdd879',GradientType=0 ); /* IE6-9 */
+}
 .card-learode
 {
     position: relative;
@@ -20,7 +44,13 @@
     padding-top: 2em;
     padding-left: 2em;
 }
-
+.card-read {
+    vertical-align: middle;
+    padding-top: 4.3em;
+    padding-left: 6em;
+    margin-left: auto;
+    margin-right: auto;
+}
 .btn-auth,
 .btn-auth:visited {
     position: relative;
@@ -94,14 +124,14 @@
 
 .btn-github,
 .btn-github:visited {
-    border-color: #d4d4d4;
-    background: #ececec;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-    background-image: -webkit-linear-gradient(#f4f4f4, #ececec);
-    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-    background-image: -ms-linear-gradient(#f4f4f4, #ececec);
-    background-image: -o-linear-gradient(#f4f4f4, #ececec);
-    background-image: linear-gradient(#f4f4f4, #ececec);
+    border-color: #111a51;
+    background: #434868;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cbd8ab), to(#bdd879));
+    background-image: -webkit-linear-gradient(#cbd8ab, #bdd879);
+    background-image: -moz-linear-gradient(#cbd8ab, #bdd879);
+    background-image: -ms-linear-gradient(#cbd8ab, #bdd879);
+    background-image: -o-linear-gradient(#cbd8ab, #bdd879);
+    background-image: linear-gradient(#cbd8ab, #bdd879);
 }
 
 .btn-github:hover,
@@ -110,12 +140,12 @@
     border-bottom-color: #2a65a0;
     color: #fff;
     background-color: #599bdc;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
-    background-image: -webkit-linear-gradient(#599bdc, #3072b3);
-    background-image: -moz-linear-gradient(#599bdc, #3072b3);
-    background-image: -ms-linear-gradient(#599bdc, #3072b3);
-    background-image: -o-linear-gradient(#599bdc, #3072b3);
-    background-image: linear-gradient(#599bdc, #3072b3);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ACD363), to(#86BA27));
+    background-image: -webkit-linear-gradient(#ACD363, #86BA27);
+    background-image: -moz-linear-gradient(#ACD363, #86BA27);
+    background-image: -ms-linear-gradient(#ACD363, #86BA27);
+    background-image: -o-linear-gradient(#ACD363, #86BA27);
+    background-image: linear-gradient(#ACD363, #86BA27);
 }
 
 .btn-github:active {
@@ -123,12 +153,12 @@
     border-bottom-color: #518CC6;
     color: #fff;
     background: #3072B3;
-    background: -webkit-gradient(linear, 0 0, 0 100%, from(#3072b3), to(#599bdc));
-    background: -webkit-linear-gradient(#3072b3, #599bdc);
-    background: -moz-linear-gradient(#3072b3, #599bdc);
-    background: -ms-linear-gradient(#3072b3, #599bdc);
-    background: -o-linear-gradient(#3072b3, #599bdc);
-    background: linear-gradient(#3072b3, #599bdc);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#86BA27), to(#ACD363));
+    background: -webkit-linear-gradient(#86BA27, #ACD363);
+    background: -moz-linear-gradient(#86BA27, #ACD363);
+    background: -ms-linear-gradient(#86BA27, #ACD363);
+    background: -o-linear-gradient(#86BA27, #ACD363);
+    background: linear-gradient(#86BA27, #ACD363);
 }
 
 /*
@@ -154,4 +184,13 @@
 .btn-github.large:focus:before,
 .btn-github.large:active:before {
     background-position: -108px -22px;
+}
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 110px;
+    width: 100%;
+    overflow:hidden;
+}
 
