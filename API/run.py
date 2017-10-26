@@ -17,7 +17,6 @@ app.config['GITHUB_CLIENT_ID'] = ''
 app.config['GITHUB_CLIENT_SECRET'] = ''
 app.config['SECRET_KEY'] = ''
 
-
 github = GitHub(app)
 CORS(app)
 

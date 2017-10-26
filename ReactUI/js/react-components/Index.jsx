@@ -62,8 +62,6 @@ class Index extends React.Component {
             </div>
             </nav>
             <div className="container">
-            <h1>H</h1>
-            <h2>h</h2>
             {this.state.connected ?
                 <App username={this.state.username}></App> :
                 <div className="container">
