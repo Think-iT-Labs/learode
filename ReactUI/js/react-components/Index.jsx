@@ -85,7 +85,7 @@ class Index extends React.Component {
             </div>
             <footer className="py-5 bg-footer footer">
             <div className="container">
-                <p className="m-0 text-center text-black copyright-text">Copyright &copy; Learode 2017</p>
+                <p className="m-0 text-center copyright-text">Copyright &copy; Learode 2017</p>
             </div>
             </footer>
         </div>
