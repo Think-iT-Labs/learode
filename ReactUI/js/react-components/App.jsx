@@ -34,15 +34,6 @@ class App extends React.Component {
         }
     }
 
-    
-    /*fetchUsername(un) {
-        this.setState({
-            username: this.refs.un.value,
-            fetched: true
-        });
-    }*/
-
-
     manualGitScan() {
         axios.get('http://127.0.0.1:5000/scan/' + this.state.username)
             .then(function(response) {
