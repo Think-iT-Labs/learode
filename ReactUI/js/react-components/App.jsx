@@ -1,19 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import Learode from './learode.jsx';
-//import DrawerTest from './drawer.jsx'; WIP: Drawer feature 
+//import DrawerTest from './drawer.jsx'; TODO: Drawer feature 
 
 class App extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            username: "",
+            username: this.props.username,
             operation: "new",
             oppositelistname: "last reading list",
-            fetched: false
+            fetched: true
         }
-
     }
 
 
@@ -34,15 +33,6 @@ class App extends React.Component {
             })
         }
     }
-
-
-    fetchUsername(un) {
-        this.setState({
-            username: this.refs.un.value,
-            fetched: true
-        });
-    }
-
 
     manualGitScan() {
         axios.get('http://127.0.0.1:5000/scan/' + this.state.username)
@@ -76,14 +66,6 @@ class App extends React.Component {
             </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <div className="input-container">
-                            <form>
-                                <input type="text" className="form-control input-sm chat-input" id="username" ref="un" placeholder="Github Username"/>
-                                <input type="button" className="btn btn-primary btn-md" value="Go!" onClick={(un)=>this.fetchUsername(un)}/>
-                            </form>
-                        </div>
-                    </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.switchMode()}>Switch to {this.state.oppositelistname}</a>
                     </li>

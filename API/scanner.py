@@ -8,14 +8,25 @@ url = 'https://api.github.com'
 db = db_connect()
 logger = create_logger()
 
+def get_access_token(username):
+    try:
+        user = db.user.find_one({
+        'github_username': username
+    })
+    except pm.errors.OperationFailure as err:
+        logger.error(err)
+        return None
 
-def request_git_api(request_url):
+    if 'github_access_token' not in user:
+        return False
+
+    return user['github_access_token']
+
+def request_git_api(request_url, access_token):
     res = None
-    #headers_dict = {'Authorization':
-    #                'token ENTER_TOKEN_HERE'}
 
     try:
-        res = requests.get(request_url, timeout=5) #headers=headers_dict, timeout=5)
+        res = requests.get(request_url, timeout=15, auth=('token',access_token))
         res.raise_for_status()
     except Exception as err:
         logger.error(err)
@@ -26,8 +37,14 @@ def request_git_api(request_url):
 
 def git_scan(user):
     request_url = '{}/users/{}/repos'.format(url, user)
-    res_user_repos = request_git_api(request_url)
-    print(res_user_repos)
+
+    access_token = get_access_token(user)
+    if access_token is False:
+        logger.error("User not authentified")
+        return False
+
+    res_user_repos = request_git_api(request_url, access_token)
+    
     if not res_user_repos:
         return False
     json_user_repos = res_user_repos.json()
@@ -36,7 +53,7 @@ def git_scan(user):
     res_user_languages = []
     languages = []
     for repo in json_user_repos:
-        res_user_languages = request_git_api(repo["languages_url"])
+        res_user_languages = request_git_api(repo["languages_url"], access_token)
         if not res_user_languages:
             continue
         json_user_languages = res_user_languages.json()
@@ -142,8 +159,6 @@ def manual_scan(user):
     result = store_reading_list(reading_list, user)
     if not result:
         logger.error("store_reading_list() returned False")
-
-    print("Done")
 
     return True
 
