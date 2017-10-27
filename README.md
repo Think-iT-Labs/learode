@@ -10,21 +10,27 @@ Learode is a portmanteau made by the words Learn and Code, referring to the goal
 	 - requests==2.13.0
 	 - pymongo==3.5.1
 	 - eve==0.7.4
+	 - flask==0.12
+	 - github-flask==3.1.7
+	 - flask_cors==3.0.3
  - ReactJS dependencies: 
-	 - "axios": "^0.16.2"
-	 - "postcss": "^6.0.12"
-	 - "postcss-cssnext": "^3.0.2"
-	 - "react": "^15.6.1" 
-	 - "react-toolbox":"^2.0.0-beta.12" 
-	 - "style-loader": "^0.18.2"
-	 - "webpack": "^3.6.0"
- - ReactJS dev dependencies 
-	 - "css-loader":"^0.28.7" 
-	 - "node-sass": "^4.5.3" 
-	 - "postcss-load-config": "^1.2.0"
-	 - "postcss-loader": "^2.0.6" 
-	 - "sass-loader": "^6.0.6"
-	 - "webpack": "^3.6.0"
+	 - axios: ^0.16.2 
+	 - postcss: ^6.0.12
+	 - postcss-cssnext: ^3.0.2
+	 - query-string: ^5.0.1
+	 - react: ^15.6.1
+	 - react-dom: ^15.6.1
+	 - react-toolbox: ^2.0.0-beta.12
+	 - style-loader: ^0.18.2
+	 - webpack: ^3.6.0
+	 - webpack-dev-server: ^2.8.2
+ - ReactJS dev dependencies:
+	 - css-loader:^0.28.7 
+	 - node-sass: ^4.5.3 
+	 - postcss-load-config: ^1.2.0
+	 - postcss-loader: ^2.0.6
+	 - sass-loader: ^6.0.6
+	 - webpack: ^3.6.0
 
 ### Installing
 
@@ -39,6 +45,8 @@ The program will connect to the default host and port (localhost:27017). If you 
     $ npm start
 
 ### Using Learode dev version
+
+**Deprecated**
 
  1. Connect to the host and port of ReactJS (default is localhost:8080)
  2. Enter the username in the textfield in the navbar
