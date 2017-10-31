@@ -28,8 +28,7 @@ class Index extends React.Component {
                         username: user,
                         connected: true
                     }, function() {
-                        console.log(this.state.connected);
-                        console.log(this.state.username);
+                        console.log("connected");
                     });
                     return true
                 } else {

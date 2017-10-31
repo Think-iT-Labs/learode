@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Learode from './learode.jsx';
 //import DrawerTest from './drawer.jsx'; TODO: Drawer feature 
-
+var urlForScan = user => `http://localhost:5000/scan/${user}`
+var urlForLogout = user => `http://localhost:5000/logout/${user}`
 class App extends React.Component {
 
     constructor(props) {
@@ -35,7 +36,7 @@ class App extends React.Component {
     }
 
     manualGitScan() {
-        axios.get('http://127.0.0.1:5000/scan/' + this.state.username)
+        axios.get(urlForScan(this.state.username))
             .then(function(response) {
                 console.log(response);
             })
@@ -44,6 +45,18 @@ class App extends React.Component {
             });
     }
 
+    logout(){
+        axios.get(urlForLogout(this.state.username))
+            .then((response) => {
+                this.setState({
+                        username: '',
+                        connected: false
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            })
+    }
 
     renderContent() {
         if (this.state.fetched == true) {
@@ -63,7 +76,7 @@ class App extends React.Component {
                 <a className="navbar-brand super-text" href="#">Learode: Learn by Coding !</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
-            </button>
+                </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
@@ -71,6 +84,9 @@ class App extends React.Component {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.manualGitScan()}>Rescan Github</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#" onClick={()=> this.logout()}>Log out</a>
                     </li>
                 </ul>
                 </div>

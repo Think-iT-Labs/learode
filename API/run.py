@@ -87,7 +87,7 @@ def logout(username):
         logger.error(err)
         return jsonify({"response": 500})
 
-    return redirect("http://localhost:8080")
+    return redirect("http://localhost:8080/")
 
 @app.route('/check/<username>')
 def check_token(username):
@@ -101,6 +101,8 @@ def check_token(username):
 
     if user is None:
         return jsonify({'response':404})
+    if "github_access_token" not in user:
+        return jsonify({"response":401})
 
     res = requests.get('https://api.github.com/applications/{}/tokens/{}'.format(
     app.config['GITHUB_CLIENT_ID'], user['github_access_token']), 

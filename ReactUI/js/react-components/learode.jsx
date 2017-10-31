@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Reading from './reading.jsx';
 
-const urlForUsername = username =>
+var urlForUsername = username =>
     `http://127.0.0.1:5000/user/${username}`
 
 class Learode extends Component {
@@ -21,7 +21,6 @@ class Learode extends Component {
                 if (!response.ok) {
                     throw Error("Network request failed")
                 }
-
                 return response
             })
             .then(d => d.json())
