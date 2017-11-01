@@ -125,13 +125,8 @@ def check_token(username):
 
 @app.route('/resource')
 def insert_resource():
-    print(request)
-    print(request.method)
-    print(request.text)
-    print(request.get_json(force=True))
     if request.method == "POST":
         data = request.data
-        print(data)
         if not data:
             return jsonify({"response":400})
         insert_data = {
