@@ -13,9 +13,6 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-app.config['GITHUB_CLIENT_ID'] = ''
-app.config['GITHUB_CLIENT_SECRET'] = ''
-app.config['SECRET_KEY'] = ''
 
 github = GitHub(app)
 CORS(app)

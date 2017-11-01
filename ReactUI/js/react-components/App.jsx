@@ -1,9 +1,21 @@
 import React from 'react';
 import axios from 'axios';
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter
+} from 'react-modal-bootstrap';
+
 import Learode from './learode.jsx';
-//import DrawerTest from './drawer.jsx'; TODO: Drawer feature 
+import AddResourceForm from './add_resource_form.jsx';
+
+
 var urlForScan = user => `http://localhost:5000/scan/${user}`
 var urlForLogout = user => `http://localhost:5000/logout/${user}`
+
 class App extends React.Component {
 
     constructor(props) {
@@ -12,8 +24,12 @@ class App extends React.Component {
             username: this.props.username,
             operation: "new",
             oppositelistname: "last reading list",
-            fetched: true
+            fetched: true,
+            isOpen: false,
+            isSubOpen: false
         }
+        this.openModal = this.openModal.bind(this)
+        this.hideModal = this.hideModal.bind(this);
     }
 
 
@@ -58,6 +74,19 @@ class App extends React.Component {
             })
     }
 
+  openModal(){
+    this.setState({
+      isOpen: true
+    });
+  }
+
+  hideModal(){
+    this.setState({
+      isOpen: false,
+      fetched: true
+    });
+  }
+
     renderContent() {
         if (this.state.fetched == true) {
             this.state.fetched = false
@@ -66,7 +95,6 @@ class App extends React.Component {
             return false
         }
     }
-
 
     render() {
         return (
@@ -79,6 +107,9 @@ class App extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#" onClick={()=> this.openModal()}>Add new resource</a>
+                    </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.switchMode()}>Switch to {this.state.oppositelistname}</a>
                     </li>
@@ -93,8 +124,27 @@ class App extends React.Component {
             </div>
             </nav>
             <div className="container">
+
             <h1>H</h1>
             <h2>h</h2>
+
+            <Modal isOpen={this.state.isOpen} size='modal-lg' onRequestHide={this.hideModal}>
+              <ModalHeader>
+                <ModalClose onClick={this.hideModal}/>
+                <ModalTitle>Add new resource</ModalTitle>
+              </ModalHeader>
+              <ModalBody>
+
+              <AddResourceForm />
+
+              </ModalBody>
+              <ModalFooter>
+                <button className='btn btn-default' onClick={this.hideModal}>
+                  Close
+                </button>
+              </ModalFooter>
+            </Modal>
+
             {this.renderContent() ?
             <div className='app'>
                 <Learode operation={this.state.operation} username={this.state.username}></Learode>

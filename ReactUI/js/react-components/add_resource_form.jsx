@@ -45,9 +45,6 @@ class AddResourceForm extends React.Component {
         <div>
          <form className="form-basic" onSubmit={this.submitForm}>
 
-            <div className="form-title-row">
-                <h1>Add new resource</h1>
-            </div>
             <div className="form-row">
                 <label>
                     <span>Title</span>
