@@ -7,31 +7,32 @@ MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
 X_DOMAINS = '*'
 MONGO_DBNAME = 'Learode'
-X_HEADERS = 'Access-Control-Allow-Origin'
+X_HEADERS = ['*']
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
-
+ALLOWED_ROLES = ['*']
+DEBUG = True
 
 DOMAIN = {
     'resource': {
         'schema': {
             'res_id': {
-                'type': 'int',
-
+                'type': 'integer',
+                'unique': True
             },
             'title': {
-                'type': 'string',
-
+                'type': 'string'
             },
             'url': {
-                'type': 'string',
+                'type': 'string'
 
             },
             'language': {
-                'type': 'string',
-
+                'type': 'string'
             },
-
+            'level': {
+                'type': 'string'
+            }
         },
         'additional_lookup': {
             'url': 'int',
@@ -43,13 +44,12 @@ DOMAIN = {
         'schema': {
             'user_id': {
                 'type': 'int',
-
             },
             'github_username': {
                 'type': 'string',
 
             },
-            'oauth_data': {
+            'github_access_token': {
                 'type': 'string',
 
             },
