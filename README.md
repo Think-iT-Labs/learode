@@ -14,23 +14,25 @@ Learode is a portmanteau made by the words Learn and Code, referring to the goal
 	 - github-flask==3.1.7
 	 - flask_cors==3.0.3
  - ReactJS dependencies: 
-	 - axios: ^0.16.2 
-	 - postcss: ^6.0.12
-	 - postcss-cssnext: ^3.0.2
-	 - query-string: ^5.0.1
-	 - react: ^15.6.1
-	 - react-dom: ^15.6.1
-	 - react-toolbox: ^2.0.0-beta.12
-	 - style-loader: ^0.18.2
-	 - webpack: ^3.6.0
-	 - webpack-dev-server: ^2.8.2
+	 - axios: ^ 0.16.2 
+	 - postcss: ^ 6.0.12
+	 - postcss-cssnext: ^ 3.0.2
+	 - query-string: ^ 5.0.1
+	 - react: ^ 15.6.1
+	 - react-dom: ^ 15.6.1
+	 - react-form: ^ 2.1.5
+    	 - react-modal-bootstrap: ^ 1.1.1
+	 - react-toolbox: ^ 2.0.0-beta.12
+	 - style-loader: ^ 0.18.2
+	 - webpack: ^ 3.6.0
+	 - webpack-dev-server: ^ 2.8.2
  - ReactJS dev dependencies:
-	 - css-loader:^0.28.7 
-	 - node-sass: ^4.5.3 
-	 - postcss-load-config: ^1.2.0
-	 - postcss-loader: ^2.0.6
-	 - sass-loader: ^6.0.6
-	 - webpack: ^3.6.0
+	 - css-loader:^ 0.28.7 
+	 - node-sass: ^ 4.5.3 
+	 - postcss-load-config: ^ 1.2.0
+	 - postcss-loader: ^ 2.0.6
+	 - sass-loader: ^ 6.0.6
+	 - webpack: ^ 3.6.0
 
 ### Installing
 
