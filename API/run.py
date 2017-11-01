@@ -2,7 +2,7 @@ from eve import Eve
 from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
 from flask_cors import CORS
-
+import pymongo as pm
 
 import requests
 import json
@@ -89,6 +89,18 @@ def logout(username):
 
     return redirect("http://localhost:8080/")
 
+@app.route('/seq')
+def last_seq_number():
+    try:
+        ret = db.counters.find_and_modify(query={
+                     '_id': 'userid' }, update=
+                    {'$inc': { 'seq': 1 }}, upsert=True)
+    except pm.errors.OperationFailure as err:
+        logger.error(err)
+        return jsonify({"response": 500})
+
+    return jsonify({'seq':ret['seq']})
+
 @app.route('/check/<username>')
 def check_token(username):
     try:
@@ -113,6 +125,32 @@ def check_token(username):
         return jsonify({"response":200})
     else:
         return jsonify({"response":500})
+
+@app.route('/resource')
+def insert_resource():
+    print(request)
+    print(request.method)
+    print(request.text)
+    print(request.get_json(force=True))
+    if request.method == "POST":
+        data = request.data
+        print(data)
+        if not data:
+            return jsonify({"response":400})
+        insert_data = {
+            'res_id': data['res_id'],
+            'title': data['title'],
+            'url': data['url'],
+            'language': data['language'],
+            'level': data['level']
+            }
+        try:
+            db.resource.insert_one(insert_data)
+        except:
+            logger.error(err)
+            return jsonify({"response":500})
+
+    return jsonify({"response":200})
 
 if __name__ == '__main__':
     app.run(threaded=True)

@@ -30,7 +30,7 @@ def request_git_api(request_url, access_token):
         res.raise_for_status()
     except Exception as err:
         logger.error(err)
-        return False
+        return None
 
     return res
 
@@ -39,7 +39,7 @@ def git_scan(user):
     request_url = '{}/users/{}/repos'.format(url, user)
 
     access_token = get_access_token(user)
-    if access_token is False:
+    if access_token is None:
         logger.error("User not authentified")
         return False
 

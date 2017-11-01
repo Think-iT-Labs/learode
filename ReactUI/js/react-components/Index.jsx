@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import App from './App.jsx';
+import AddResourceForm from './add_resource_form.jsx';
 import queryString from 'query-string';
 
 
@@ -59,6 +60,10 @@ class Index extends React.Component {
             </div>
             </nav>
             <div className="container">
+	<h1>f</h1>
+	<h1>f</h1>
+	<h1>f</h1>
+	    <AddResourceForm />
             {this.state.connected ?
                 <App username={this.state.username}></App> :
                 <div className="container">

@@ -29,7 +29,7 @@ test_resource_query = [
         "title": "Intermediate Python",
         "url": "http: //www.book.pythontips.com",
         "language": "python",
-        "level": "medium",
+        "level": "intermediate",
 	"read_by": []
     },
     {
@@ -37,7 +37,7 @@ test_resource_query = [
         "title": "Python End-to-End Data analysis",
         "url": "https://www.packtpub.com/big-data-and-business-intelligence/python-end-end-data-analysis",
         "language": "python",
-        "level": "medium",
+        "level": "intermediate",
 	"read_by": []
     },
     {
