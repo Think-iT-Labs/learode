@@ -30,6 +30,7 @@ class AddResourceForm extends React.Component {
                 "url": this.state.url,
                 "language": this.state.language,
                 "level": this.state.level,
+		"read_by":[],
 		"created_by": this.props.username
             },
             axios.post(urlForResource, data, {headers:{"Content-Type":"application/json"}})

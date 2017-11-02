@@ -1,7 +1,6 @@
 from eve import Eve
 from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
-from flask_cors import CORS, cross_origin
 from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
 
@@ -18,9 +17,7 @@ assert db is not None
 app = Eve()
 
 
-CORS(app)
 app.config["APPLICATION_ROOT"] = "/api"
-
 
 github = GitHub(app)
 

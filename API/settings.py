@@ -24,7 +24,6 @@ DOMAIN = {
             },
             'url': {
                 'type': 'string'
-
             },
             'language': {
                 'type': 'string'

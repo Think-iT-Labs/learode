@@ -7,7 +7,9 @@ const urlForResource = resource =>
 class Reading extends Component {
     constructor(props) {
         super(props)
+        console.log(this.props)
         this.setRead = this.setRead.bind(this)
+        this.checkRead = this.checkRead.bind(this)
     }
 
     setRead(){ 
@@ -17,6 +19,14 @@ class Reading extends Component {
         axios.post(urlForResource(this.props.item.res_id), data)
         .then(response => console.log(response))
         .catch(error => console.log(error))
+    }
+
+    checkRead(){
+        for(var i = 0; i < this.props.item.read_by.length; i++) {
+            if(this.props.item.read_by[i] == this.props.username)
+                return true;
+        }
+        return false;
     }
 
     render() {
