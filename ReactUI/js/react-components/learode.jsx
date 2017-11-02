@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Reading from './reading.jsx';
 
 var urlForUsername = username =>
-    `http://127.0.0.1:5000/user/${username}`
+    `/api/user/${username}`
 
 class Learode extends Component {
 
@@ -12,8 +12,17 @@ class Learode extends Component {
             requestFailed: false,
             learodeData: false
         }
+        this.getIndex = this.getIndex.bind(this)
     }
 
+    getIndex(value, arr, prop) {
+        for(var i = 0; i < arr.length; i++) {
+            if(arr[i] === value) {
+                return i;
+            }
+        }
+        return -1; 
+    }
 
     componentDidMount() {
         fetch(urlForUsername(this.props.username))
@@ -41,19 +50,18 @@ class Learode extends Component {
         if (!this.state.learodeData) return <p>Loading...</p>
         let renderedItems = []
         if (this.props.operation == "new") {
-            this.state.learodeData.new_reading_list.map(function(item) {
+            this.state.learodeData.new_reading_list.map(item => {
                 renderedItems.push(
-                    <Reading item={item}></Reading>
+                    <Reading item={item} username={this.props.username}></Reading>
                 )
             })
         } else if (this.props.operation == "last") {
-            this.state.learodeData.last_reading_list.map(function(item) {
+            this.state.learodeData.last_reading_list.map(item => {
                 renderedItems.push(
-                    <Reading item={item}></Reading>
+                    <Reading item={item} username={this.props.username}></Reading>
                 )
             })
         };
-        console.log(renderedItems[1])
         return (
             <div> {renderedItems} </div>
         )

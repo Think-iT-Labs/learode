@@ -1,7 +1,10 @@
 from eve import Eve
 from flask import jsonify, request, url_for, redirect, flash
 from flask_github import GitHub
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
+from werkzeug.serving import run_simple
+from werkzeug.wsgi import DispatcherMiddleware
+
 import pymongo as pm
 
 import requests
@@ -14,10 +17,14 @@ assert db is not None
 
 app = Eve()
 
-github = GitHub(app)
-CORS(app)
 
-username = ""
+CORS(app)
+app.config["APPLICATION_ROOT"] = "/api"
+
+
+github = GitHub(app)
+
+
 
 @app.route('/scan/<git_username>')
 def launch_scan(git_username):
@@ -42,7 +49,7 @@ def login():
 @app.route('/callback')
 @github.authorized_handler
 def authorized(oauth_token):
-    next_url = 'http://localhost:8080/'
+    next_url = 'http://localhost/'
     if oauth_token is None:
         flash("Authorization failed.")
         return jsonify({"response": 500})
@@ -84,7 +91,7 @@ def logout(username):
         logger.error(err)
         return jsonify({"response": 500})
 
-    return redirect("http://localhost:8080/")
+    return redirect("http://localhost/")
 
 @app.route('/seq')
 def last_seq_number():
@@ -123,26 +130,52 @@ def check_token(username):
     else:
         return jsonify({"response":500})
 
-@app.route('/resource')
+@app.route('/resource', methods=['POST'])
 def insert_resource():
+    print(request)
+    if request.method != "POST":
+        return ({"response":405})    
     if request.method == "POST":
-        data = request.data
+        data = request.get_json()
         if not data:
             return jsonify({"response":400})
         insert_data = {
-            'res_id': data['res_id'],
+            'res_id': int(data['res_id']),
             'title': data['title'],
             'url': data['url'],
             'language': data['language'],
-            'level': data['level']
+            'level': data['level'],
+            'created_by': data['created_by']
             }
         try:
             db.resource.insert_one(insert_data)
-        except:
+        except pm.errors.OperationFailure as err:
             logger.error(err)
             return jsonify({"response":500})
 
-    return jsonify({"response":200})
+        return redirect("http://localhost/?login={}".format(data['created_by']))
+
+@app.route('/resource/<res_id>', methods=['POST'])
+def mark_as_read(res_id):
+    if request.method == "POST":
+        data = request.get_json()
+        if not data:
+            return jsonify({"response":400})
+        try:
+            db.resource.update({ 
+                'res_id': int(res_id)
+                },
+                { '$push': {
+                 'read_by': data['read_by']
+                }}, upsert=True
+            )
+        except pm.errors.OperationFailure as err:
+            logger.error(err)
+            return jsonify({"response":500})
+
+    return redirect("http://localhost/?login={}".format(data['read_by']))
+
+app.wsgi_app = DispatcherMiddleware(run_simple, {'/api': app.wsgi_app})
 
 if __name__ == '__main__':
     app.run(threaded=True)

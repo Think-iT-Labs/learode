@@ -5,8 +5,8 @@ import App from './App.jsx';
 import queryString from 'query-string';
 
 
-const urlForLogin = `http://localhost:5000/login`
-var urlForCheck = user => `http://localhost:5000/check/${user}`
+const urlForLogin = `/api/login`
+var urlForCheck = user => `/api/check/${user}`
 
 
 class Index extends React.Component {

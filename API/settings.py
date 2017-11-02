@@ -7,11 +7,10 @@ MONGO_USERNAME = ''
 MONGO_PASSWORD = ''
 X_DOMAINS = '*'
 MONGO_DBNAME = 'Learode'
-X_HEADERS = ['*']
+X_HEADERS = '*'
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 ALLOWED_ROLES = ['*']
-DEBUG = True
 
 DOMAIN = {
     'resource': {
@@ -32,7 +31,13 @@ DOMAIN = {
             },
             'level': {
                 'type': 'string'
-            }
+            },
+            'read_by': {
+                'type': 'list'
+            },
+            'created_by': {
+                'type': 'string'
+            },
         },
         'additional_lookup': {
             'url': 'int',
@@ -54,11 +59,11 @@ DOMAIN = {
 
             },
             'last_reading_list': {
-                'type': 'array',
+                'type': 'list',
 
             },
             'new_reading_list': {
-                'type': 'array',
+                'type': 'list',
 
             }
         },

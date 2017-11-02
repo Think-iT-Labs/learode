@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-const urlForResource = `http://127.0.0.1:5000/resource`
-const urlForSeq = `http://127.0.0.1:5000/seq`
+const urlForResource = `/api/resource`
+const urlForSeq = `/api/seq`
 
 class AddResourceForm extends React.Component {
 
@@ -22,7 +22,6 @@ class AddResourceForm extends React.Component {
 
     submitForm(){
         let data = {}
-        this.forceUpdate()
         axios.get(urlForSeq)
         .then(response => (
             data = {
@@ -30,11 +29,11 @@ class AddResourceForm extends React.Component {
                 "title": this.state.title,
                 "url": this.state.url,
                 "language": this.state.language,
-                "level":this.state.level
+                "level": this.state.level,
+		"created_by": this.props.username
             },
-            console.log(data),
-            axios.post(urlForResource, data)
-            .then(response => console.log(response))
+            axios.post(urlForResource, data, {headers:{"Content-Type":"application/json"}})
+            .then(response => console.log(response),console.log(data))
             .catch(errors => console.log(errors))
         ))
         .catch(errors => console.log(errors));
@@ -73,21 +72,21 @@ class AddResourceForm extends React.Component {
 
                     <div>
                         <label>
-                            <input type="radio" name="skill" value="beginner" onChange = {this.updateState}/>
+                            <input type="radio" name="level" value="beginner" onChange = {this.updateState}/>
                             <span>Beginner</span>
                         </label>
                     </div>
 
                     <div>
                         <label>
-                            <input type="radio" name="skill" value="intermediate" onChange = {this.updateState} />
+                            <input type="radio" name="level" value="intermediate" onChange = {this.updateState} />
                             <span>Intermediate</span>
                         </label>
                     </div>
 
                     <div>
                         <label>
-                            <input type="radio" name="skill" value="advanced" onChange = {this.updateState}/>
+                            <input type="radio" name="level" value="advanced" onChange = {this.updateState}/>
                             <span>Advanced</span>
                         </label>
                     </div>

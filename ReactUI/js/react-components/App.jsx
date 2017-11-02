@@ -13,8 +13,8 @@ import Learode from './learode.jsx';
 import AddResourceForm from './add_resource_form.jsx';
 
 
-var urlForScan = user => `http://localhost:5000/scan/${user}`
-var urlForLogout = user => `http://localhost:5000/logout/${user}`
+var urlForScan = user => `/api/scan/${user}`
+var urlForLogout = user => `/api/logout/${user}`
 
 class App extends React.Component {
 
@@ -135,7 +135,7 @@ class App extends React.Component {
               </ModalHeader>
               <ModalBody>
 
-              <AddResourceForm />
+              <AddResourceForm username={this.state.username}/>
 
               </ModalBody>
               <ModalFooter>

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import Link from 'react-toolbox/lib/link';
+import axios from 'axios';
 
 const urlForResource = resource =>
-    `http://127.0.0.1:5000/resource/${resource}`
+    `/api/resource/${resource}`
 
 class Reading extends Component {
     constructor(props) {
         super(props)
+        this.setRead = this.setRead.bind(this)
     }
 
-    setRead(resource){ //TODO
-        axios.post(urlForResource(resource), {
-      content : value
-    })
-    .then(function (message) {
-      console.log(message);
-    })
+    setRead(){ 
+        let data = {
+        "read_by": this.props.username
+        }
+        axios.post(urlForResource(this.props.item.res_id), data)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     }
 
     render() {
@@ -34,7 +35,7 @@ class Reading extends Component {
                     <p className="card-text">URL: <a href={this.props.item.url}>Click here</a></p>
                 </div>
 		<div className="col-lg-3 portfolio-item card-read">
-		    <a href='#' className="btn btn-primary btn-success"><img src="../../pics/tick.gif" height="20" width="20"></img> Read</a>
+		    <a href='#' className="btn btn-primary btn-success" onClick={this.setRead}><img src="../../pics/tick.gif" height="20" width="20"></img> Read</a>
 		</div>
             </div>
         </div>
