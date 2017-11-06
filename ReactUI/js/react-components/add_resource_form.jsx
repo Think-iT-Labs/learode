@@ -55,7 +55,17 @@ class AddResourceForm extends React.Component {
             <div className="form-row">
                 <label>
                     <span>Programming Language</span>
-                    <input type="text" name="language" onChange = {this.updateState}/>
+                    <select onChange = {this.updateState}>
+		                <option value="csharp">C#</option>
+                        <option value="c">C</option>
+                        <option value="c++">C++</option>
+                        <option value="perl">Perl</option>
+		                <option value="ruby">Ruby</option>
+                        <option value="python">Python</option>
+                        <option value="javascript">Javascript</option>
+                        <option value="html">HTML</option>
+		                <option value="css">CSS</option>
+                    </select>
                 </label>
             </div>
 

@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 const urlForResource = resource =>
-    `/api/resource/${resource}`
+    `/api/resource/read/${resource}`
 
 class Reading extends Component {
     constructor(props) {
         super(props)
-        console.log(this.props)
         this.setRead = this.setRead.bind(this)
         this.checkRead = this.checkRead.bind(this)
     }
 
     setRead(){ 
         let data = {
-        "read_by": this.props.username
+            "read_by": this.props.username
         }
         axios.post(urlForResource(this.props.item.res_id), data)
         .then(response => console.log(response))
         .catch(error => console.log(error))
+
     }
 
     checkRead(){
@@ -32,10 +32,13 @@ class Reading extends Component {
     render() {
         return (
     <div>
+        {this.checkRead() == false ?
         <div className="row">
         <div className="col-lg-12 portfolio-item">
             <div className="card-learode">
-                <a href="#"><img className="card-img-learode" src={"pics/"+this.props.item.language+".png"} alt="" /></a>
+                <div className="card-image-frame">
+                    <span className="card-helper"></span><img className="card-image" src={"pics/"+this.props.item.language+".png"} alt="" />
+                </div>
                 <div className="card-body">
                     <h4 className="card-title">
                         <a href="#">{this.props.item.title}</a>
@@ -49,7 +52,7 @@ class Reading extends Component {
 		</div>
             </div>
         </div>
-        </div>
+        </div> : ''}
     </div>
         )
     }

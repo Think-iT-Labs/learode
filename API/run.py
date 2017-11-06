@@ -15,7 +15,9 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-
+app.config['GITHUB_CLIENT_ID'] = 'a2dfecffbb39b5f749fb'
+app.config['GITHUB_CLIENT_SECRET'] = 'ff7b92af5ba6a1d2299dcb94ca6ebd2fde00f3de'
+app.config['SECRET_KEY'] = 'J{mlfdsjgkfdsgfgkfgkp'
 
 app.config["APPLICATION_ROOT"] = "/api"
 
@@ -71,7 +73,7 @@ def authorized(oauth_token):
         user = db.user.update({
             'github_username': username
         },
-                       update_query)
+                       update_query,upsert=True)
     
     return redirect(next_url+'?login={}'.format(username))
 
@@ -152,25 +154,66 @@ def insert_resource():
 
         return redirect("http://localhost/?login={}".format(data['created_by']))
 
-@app.route('/resource/<res_id>', methods=['POST'])
+@app.route('/resource/read/<res_id>', methods=['POST'])
 def mark_as_read(res_id):
     if request.method == "POST":
         data = request.get_json()
         if not data:
             return jsonify({"response":400})
         try:
-            db.resource.update({ 
-                'res_id': int(res_id)
+            db.resource.update({  
+                    'res_id': int(res_id)
                 },
-                { '$push': {
-                 'read_by': data['read_by']
-                }}, upsert=True
+                {  
+                    '$addToSet': {
+                        'read_by': data['read_by']
+                    }
+                }
             )
+        except pm.errors.OperationFailure as err:
+            logger.error(err)
+            return jsonify({"response":500})
+        
+        try:
+            db.user.update({
+                    'github_username':data['read_by'],
+                    'new_reading_list':{
+                        '$elemMatch':{
+                            'res_id':int(res_id)
+                        }
+                    }
+                },
+                {
+                    '$addToSet':{  
+                        'new_reading_list.$.read_by':data['read_by']
+                    }
+                }
+            )
+
+        except pm.errors.OperationFailure as err:
+            logger.error(err)
+            return jsonify({"response":500})
+
+        try:
+            db.user.update({
+                    'github_username':data['read_by'],
+                    'last_reading_list':{
+                        '$elemMatch':{
+                            'res_id':int(res_id)
+                        }
+                    }
+                },
+                {
+                    '$addToSet':{
+                        'last_reading_list.$.read_by':data['read_by']
+                    }
+            })
         except pm.errors.OperationFailure as err:
             logger.error(err)
             return jsonify({"response":500})
 
     return redirect("http://localhost/?login={}".format(data['read_by']))
+
 
 app.wsgi_app = DispatcherMiddleware(run_simple, {'/api': app.wsgi_app})
 

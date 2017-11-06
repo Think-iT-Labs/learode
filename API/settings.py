@@ -11,7 +11,7 @@ X_HEADERS = '*'
 RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
 ITEM_METHODS = ['GET', 'PATCH', 'PUT', 'DELETE']
 ALLOWED_ROLES = ['*']
-
+XML = False
 DOMAIN = {
     'resource': {
         'schema': {
