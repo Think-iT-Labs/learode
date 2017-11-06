@@ -45,7 +45,7 @@ test_resource_query = [
         "title": "Learning Javascript",
         "url": "https://www.amazon.co.uk/Learning-JavaScript-Shelley-Powers/dp/8184042159",
         "language": "javascript",
-        "level": "beginner";
+        "level": "beginner",
 	"read_by": []
     },
     {
@@ -165,11 +165,11 @@ test_resource_query = [
 ]
 
 try:
-    db.resource_collection.insert_many(test_resource_query)
+    resource_collection.insert_many(test_resource_query)
 except pm.errors.OperationFailure as err:
     print(err)
 
 try:
-    db.user_collection.insert_many(test_user_query)
+    user_collection.insert_many(test_user_query)
 except pm.errors.OperationFailure as err:
     print(err)
