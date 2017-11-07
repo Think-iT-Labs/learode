@@ -53,19 +53,19 @@ class App extends React.Component {
     }
 
     manualGitScan() {
-	this.setState({
-		allow: false
-	})
-        axios.get(urlForScan(this.state.username))
-            .then(response => {
-                this.setState({
-			fetched:true,
-			allow: true
-		})
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+	    this.setState({
+		    allow: false
+	    })
+            axios.get(urlForScan(this.state.username))
+                .then(response => {
+                    this.setState({
+			    fetched:true,
+			    allow: true
+		    })
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
     }
 
     logout(){
@@ -82,18 +82,18 @@ class App extends React.Component {
             })
     }
 
-  openModal(){
-    this.setState({
-      isOpen: true
-    });
-  }
+    openModal(){
+        this.setState({
+          isOpen: true
+        });
+    }
 
-  hideModal(){
-    this.setState({
-      isOpen: false,
-      fetched: true
-    });
-  }
+    hideModal(){
+        this.setState({
+          isOpen: false,
+          fetched: true
+        });
+     }
 
     renderContent() {
         if (this.state.fetched == true && this.state.allow == true) {
