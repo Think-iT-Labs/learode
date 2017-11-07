@@ -33,7 +33,7 @@ class Reading extends Component {
         return (
     <div>
         {this.checkRead() == false ?
-        <div className="row">
+        <div className="row animated fadeInRight">
         <div className="col-lg-12 portfolio-item">
             <div className="card-learode">
                 <div className="card-image-frame">

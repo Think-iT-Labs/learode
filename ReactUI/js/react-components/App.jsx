@@ -26,7 +26,8 @@ class App extends React.Component {
             oppositelistname: "last reading list",
             fetched: true,
             isOpen: false,
-            isSubOpen: false
+            isSubOpen: false,
+	        allow: true
         }
         this.openModal = this.openModal.bind(this)
         this.hideModal = this.hideModal.bind(this);
@@ -52,9 +53,15 @@ class App extends React.Component {
     }
 
     manualGitScan() {
+	this.setState({
+		allow: false
+	})
         axios.get(urlForScan(this.state.username))
-            .then(function(response) {
-                console.log(response);
+            .then(response => {
+                this.setState({
+			fetched:true,
+			allow: true
+		})
             })
             .catch(function(error) {
                 console.log(error);
@@ -66,7 +73,8 @@ class App extends React.Component {
             .then((response) => {
                 this.setState({
                         username: '',
-                        connected: false
+                        connected: false,
+                        allow: false
                     });
             })
             .catch(function(error) {
@@ -88,7 +96,7 @@ class App extends React.Component {
   }
 
     renderContent() {
-        if (this.state.fetched == true) {
+        if (this.state.fetched == true && this.state.allow == true) {
             this.state.fetched = false
             return true
         } else {
@@ -101,7 +109,7 @@ class App extends React.Component {
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
             <div className="container">
-                <a className="navbar-brand super-text" href="#">Learode: Learn by Coding !</a>
+                <a className="navbar-brand super-text animated fadeIn" href="#">Learode: Learn by Coding !</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
                 </button>
@@ -144,11 +152,13 @@ class App extends React.Component {
                 </button>
               </ModalFooter>
             </Modal>
-
             {this.renderContent() ?
             <div className='app'>
                 <Learode operation={this.state.operation} username={this.state.username}></Learode>
-            </div>: ""}
+            </div> : <div className="loader-container">
+		<div className="loader"></div>
+	    </div>}
+            
             </div>
             <footer className="py-5 bg-footer footer">
             <div className="container">

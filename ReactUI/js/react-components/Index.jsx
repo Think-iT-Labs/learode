@@ -15,24 +15,35 @@ class Index extends React.Component {
         super(props)
         this.state = {
             connected: false,
-            username: ''
+            username: '',
+            loading: false,
+            loginbox:true
         }
         this.verifyToken = this.verifyToken.bind(this)
     }
 
 
     verifyToken(user) {
+        this.setState({
+            loading:true,
+            loginbox:false
+        })
         axios.get(urlForCheck(user))
             .then((response) => {
                 if (response['data']['response'] == 200) {
                     this.setState({
                         username: user,
-                        connected: true
+                        connected: true,
+                        loading: false
                     }, function() {
                         console.log("connected");
                     });
                     return true
                 } else {
+                    this.setState({
+                        loading:false,
+                        loginbox:true
+                    })
                     return false
                 }
             })
@@ -52,7 +63,7 @@ class Index extends React.Component {
 <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-navbar fixed-top">
             <div className="container">
-                <a className="navbar-brand super-text" href="#">Learode: Learn by Coding !</a>
+                <a className="navbar-brand super-text animated fadeIn" href="#">Learode: Learn by Coding !</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -61,8 +72,9 @@ class Index extends React.Component {
             </nav>
             <div className="container">
             {this.state.connected ?
-                <App username={this.state.username}></App> :
-                <div className="container">
+                <App username={this.state.username}></App> : ''}
+            {this.state.loginbox ?
+                <div className="container animated fadeInRight">
                     <div className="row">
                         <form className="form-signin mg-btm">
                             <h3 className="heading-desc text-center">
@@ -80,8 +92,11 @@ class Index extends React.Component {
                             </div>
                         </form>
                     </div>
-                </div>
-                }
+                </div> : '' }
+            {this.state.loading ?
+            <div className="loader-container">
+		<div className="loader"></div>
+	    </div> : ''}
             </div>
             <footer className="py-5 bg-footer footer">
             <div className="container">
