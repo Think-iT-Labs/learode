@@ -15,9 +15,7 @@ from log_script import create_logger
 assert db is not None
 
 app = Eve()
-app.config['GITHUB_CLIENT_ID'] = 'a2dfecffbb39b5f749fb'
-app.config['GITHUB_CLIENT_SECRET'] = 'ff7b92af5ba6a1d2299dcb94ca6ebd2fde00f3de'
-app.config['SECRET_KEY'] = 'J{mlfdsjgkfdsgfgkfgkp'
+
 
 app.config["APPLICATION_ROOT"] = "/api"
 

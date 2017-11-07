@@ -27,7 +27,7 @@ class Learode extends Component {
     }
 
     componentWillMount() {
-        axios.get(urlForUsername(this.props.username), {'headers':{'accept':'application/json'}})
+        axios.get(urlForUsername(this.props.username), {'headers':{'accept':'application/json','Cache-Control':'no-cache,no-store,must-revalidate,max-age=-1,private'}})
         .then(response =>
             this.setState({
                 learodeData: response['data']
