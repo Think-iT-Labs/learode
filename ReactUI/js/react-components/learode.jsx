@@ -45,7 +45,6 @@ class Learode extends Component {
         if (this.state.requestFailed) return <p>Failed!</p>
         if (!this.state.learodeData) return <p>Loading...</p>
         let renderedItems = []
-        console.log(this.state.learodeData)
         if (this.props.operation == "new") {
             this.state.learodeData.new_reading_list.map(item => {
             if (this.getIndex(this.props.username, item.read_by) == -1) {
