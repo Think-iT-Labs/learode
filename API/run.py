@@ -11,11 +11,13 @@ import json
 
 from scanner import *
 from log_script import create_logger
-
+import config
 assert db is not None
 
 app = Eve()
-
+app.config['GITHUB_CLIENT_ID'] = config.client_id
+app.config['GITHUB_CLIENT_SECRET'] = config.client_secret
+app.config['SECRET_KEY'] = config.secret_key
 
 app.config["APPLICATION_ROOT"] = "/api"
 
@@ -210,6 +212,23 @@ def mark_as_read(res_id):
             logger.error(err)
             return jsonify({"response":500})
 
+        try:
+            res = db.resource.find_one({
+                    'res_id': int(res_id)
+                }
+            )
+            db.user.update({
+                    'github_username': data['read_by']
+                },
+                {
+                    '$addToSet': {
+                        'read': res
+                    }
+                }
+            )
+        except pm.errors.OperationFailure as err:
+            logger.error(err)
+            return jsonify({"response":500})
     return redirect("http://localhost/?login={}".format(data['read_by']))
 
 

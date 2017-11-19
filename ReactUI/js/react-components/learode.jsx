@@ -59,6 +59,12 @@ class Learode extends Component {
                     <Reading item={item} username={this.props.username}></Reading>
                 )
             })
+        } else if (this.props.operation == "read") {
+            this.state.learodeData.read.map(item => {
+                renderedItems.push(
+                    <Reading item={item} username={this.props.username}></Reading>
+                )
+            })
         };
         return (
             <div> {renderedItems} </div>

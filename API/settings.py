@@ -59,11 +59,12 @@ DOMAIN = {
             },
             'last_reading_list': {
                 'type': 'list',
-
             },
             'new_reading_list': {
                 'type': 'list',
-
+            },
+            'read':{
+                'type': 'list',
             }
         },
         'additional_lookup': {

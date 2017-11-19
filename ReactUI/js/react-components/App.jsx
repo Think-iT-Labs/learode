@@ -24,6 +24,7 @@ class App extends React.Component {
             username: this.props.username,
             operation: "new",
             oppositelistname: "last reading list",
+            readlistname: "read resources",
             fetched: true,
             isOpen: false,
             isSubOpen: false,
@@ -43,10 +44,25 @@ class App extends React.Component {
             })
 
 
-        } else if (this.state.operation == "last") {
+        } else if (this.state.operation == "last" || this.state.operation =="read") {
             this.setState({
                 operation: "new",
                 oppositelistname: "last reading list",
+                fetched: true
+            })
+        }
+    }
+
+
+    switchRead() {
+        if (this.state.operation == "new" || this.state.operation == "last") {
+            this.setState({
+                operation: "read",
+                fetched: true
+            })
+        } else if (this.state.operation == "read") {
+            this.setState({
+                operation: "new",
                 fetched: true
             })
         }
@@ -116,13 +132,16 @@ class App extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <a className="nav-link" href="#" onClick={()=> this.openModal()}>Add new resource</a>
+                        <a className="nav-link" href="#" onClick={()=> this.openModal()}>Add new tutorial</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.switchMode()}>Switch to {this.state.oppositelistname}</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#" onClick={()=> this.manualGitScan()}>Rescan Github</a>
+                        <a className="nav-link" href="#" onClick={()=> this.switchRead()}>Switch to {this.state.readlistname}</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#" onClick={()=> this.manualGitScan()}>Scan Github</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#" onClick={()=> this.logout()}>Log out</a>

@@ -115,40 +115,45 @@ except pm.errors.OperationFailure as err:
 assert res.status_code == 200
 assert 'github_access_token' not in user
 
-### test insert resource
-#print("Making a POST request to /resource...")
-#res = None
-#url = address + "/resource/1"
-#try:
-#    res = requests.get(url, timeout=5)
-#    res.raise_for_status()
-#except Exception as err:
-#    logger.error(err)
+### test seq
+print("Making a GET request to /seq...")
+res = None
 
-#if not res:
-#    raise ValueError("Variable Res == False")
+url = address + "/seq"
+try:
+    res = requests.get(url, timeout=10)
+    res.raise_for_status()
+except Exception as err:
+    logger.error(err)
 
+if not res:
+    raise ValueError("Variable Res == False")
 
-#json_res = res.json()
+try:
+    seq_number = db.counters.find_one()
+except pm.errors.OperationFailure as err:
+    logger.error(err)
+    raise ValueError("Error accessing database")
 
-#assert json_res['response'] == 200
+assert res.status_code == 200
+assert seq_number['userid']
 
-### test insert user
-#print("Making a POST request to /user...")
-#res = None
-#url = address + "/user/1"
-#try:
-#    res = requests.get(url, timeout=5)
-#    res.raise_for_status()
-#except Exception as err:
-#   logger.error(err)
+### test check
+print("Making a GET request to /check...")
+res = None
 
-#if not res:
-#    raise ValueError("Variable Res == False")
+url = address + "/check/{}".format(test_username)
+try:
+    res = requests.get(url, timeout=10)
+    res.raise_for_status()
+except Exception as err:
+    logger.error(err)
 
+if not res:
+    raise ValueError("Variable Res == False")
 
-#json_res = res.json()
-
-#assert json_res['response'] == 200
+assert res.status_code == 200
+json_res = res.json()
+assert json_res['response'] == 200
 
 print("All tests successful !")
