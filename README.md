@@ -4,6 +4,7 @@ Learode is a portmanteau made by the words Learn and Code, referring to the goal
 
 ## Getting Started
 ### Prerequisites
+ - Nginx
  - MongoDB v3.4.3
  - Python 3.6
  - Python modules
@@ -34,11 +35,10 @@ Learode is a portmanteau made by the words Learn and Code, referring to the goal
 	 - sass-loader: ^ 6.0.6
 	 - webpack: ^ 3.6.0
 
-### Installing
+### Preparing the database
 
     $ sudo service mongod start
     $ python3.6 /API/prepare_database.py 
-The program will connect to the default host and port (localhost:27017). If you want to change the default values you should modify the connection code in db_connect.py and prepare_database.py.
 
 ### Running
 
